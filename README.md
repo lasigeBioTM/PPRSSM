@@ -1,3 +1,65 @@
 # PPRSSM
 
 Personalized PageRank using Semantic Similarity Measures
+
+
+## Getting started
+
+This is the code used to run our experiments for the paper "PPR-SSM: Personalized PageRank and Semantic Similarity Measures for Entity Linking".
+
+The code has three steps:
+
+1. Generating candidates file
+2. Running PPR algorithm 
+3. Analyze results
+
+## Docker image
+
+You can build a docker image using the Dockerfile provided on this repository or download it from dockerhub:
+*docker pull andrelamurias/pprssm*
+
+## Data
+
+We used the following corpora:
+
+1. HPO GSC+ (https://github.com/lasigeBioTM/IHP/raw/master/GSC%2B.rar)
+2. ChEBI patents corpus (provided with this repo)
+3. CRAFT (https://github.com/UCDenver-ccp/CRAFT)
+
+And the following ontologies:
+
+1. HPO
+2. ChEBI
+3. Gene Ontology
+
+For each ontology, it is necessary a OBO file and a .db file processed by DiShIn. These can be obtained with the *get_data.sh* script.
+
+## Usage
+
+### Generate candidates for corpus
+First run *dishin_app.py* with flask (change .db file according to ontology to be used):
+```bash
+export FLASK_APP=dishin_app.py
+flask run
+```
+Args:
+
+1. min distance
+2. min similarity
+3. corpus dir
+
+Example:
+```bash
+python chebi_src/parse_chebi_corpus.py 1 0.5 ChebiPatents/
+```
+
+Second run the PPRforNED script:
+```bash
+javac ppr_for_ned_chebi.java
+java ppr_for_ned_chebi resnik_dishin
+```
+
+Third process the results:
+```bash
+python src/process_results.py chebi
+```

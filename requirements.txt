@@ -1,0 +1,6 @@
+fuzzywuzzy
+python-Levenshtein
+requests
+flask
+SPARQLWrapper
+ssmpy
