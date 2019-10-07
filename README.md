@@ -13,6 +13,10 @@ The code has three steps:
 2. Running PPR algorithm 
 3. Analyze results
 
+The code for each gold standard is organized on its separate directoy (hpo_src, chebi_src, and go_src).
+The main script of each gold standard are ones starting with "parse".
+The others have helper functions to generate and process data. 
+
 ## Docker image
 
 You can build a docker image using the Dockerfile provided on this repository or download it from dockerhub:
@@ -66,4 +70,14 @@ java ppr_for_ned_chebi resnik_dishin
 Process the results to get more results than what is given by PPRforNED:
 ```bash
 python src/process_results.py chebi
+```
+
+Example output:
+```
+one candidate 431
+correct 909
+wrong 105
+total 1014
+accuracy: 0.8964497041420119
+accuracy (multiple candidates): 0.8198970840480274
 ```
