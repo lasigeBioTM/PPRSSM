@@ -19,8 +19,8 @@ RUN cd obonet && python3 setup.py install
 
 
 
-RUN mkdir temp/
-RUN mkdir candidates/
+#RUN mkdir temp/
+#RUN mkdir candidates/
 
 
 #COPY chebi_pop chebi_pop
