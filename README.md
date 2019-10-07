@@ -40,7 +40,7 @@ For each ontology, it is necessary a OBO file and a .db file processed by DiShIn
 First run *dishin_app.py* with flask (change .db file according to ontology to be used):
 ```bash
 export FLASK_APP=dishin_app.py
-flask run
+flask run &
 ```
 Args:
 
@@ -53,13 +53,17 @@ Example:
 python chebi_src/parse_chebi_corpus.py 1 0.5 ChebiPatents/
 ```
 
-Second run the PPRforNED script:
+### Run PPR algorithm
+
+Run the PPRforNED script:
 ```bash
 javac ppr_for_ned_chebi.java
 java ppr_for_ned_chebi resnik_dishin
 ```
 
-Third process the results:
+### Calculate metrics
+
+Process the results to get more results than what is given by PPRforNED:
 ```bash
 python src/process_results.py chebi
 ```
