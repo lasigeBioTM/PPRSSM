@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import request
 from flask import g
@@ -16,7 +17,7 @@ app = Flask(__name__)
 
 DATABASE = "./cache.db"
 
-ssm.semantic_base("chebi.db", check_same_thread=False)
+ssm.semantic_base(os.environ["DISHIN_DB"], check_same_thread=False)
 
 # https://stackoverflow.com/a/10856450
 def init_sqlite_db(app):

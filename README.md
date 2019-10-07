@@ -41,9 +41,10 @@ For each ontology, it is necessary a OBO file and a .db file processed by DiShIn
 ## Usage
 
 ### Generate candidates for corpus
-First run *dishin_app.py* with flask (change .db file according to ontology to be used):
+First run *dishin_app.py* with flask:
 ```bash
 export FLASK_APP=dishin_app.py
+export DISHIN_DB=chebi.db
 flask run &
 ```
 Args:
