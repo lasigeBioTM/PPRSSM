@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 
 DATABASE = "./cache.db"
-ssm.semantic_base("hp.db")
+ssm.semantic_base("chebi.db")
 
 # https://stackoverflow.com/a/10856450
 def init_sqlite_db(app):
