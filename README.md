@@ -20,7 +20,7 @@ The others have helper functions to generate and process data.
 ## Docker image
 
 You can build a docker image using the Dockerfile provided on this repository or download it from dockerhub:
-*docker pull andrelamurias/pprssm*. Then either mount a volume containing this repository or clone it inside the container (the docker image doesn't contain code or data)
+*docker pull andrelamurias/pprssm*
 
 ## Data
 
@@ -50,7 +50,7 @@ Args:
 
 1. min distance
 2. min similarity
-3. corpus dir
+3. corpus dir (or ontology name for Gene Ontology entities in CRAFT corpus: "GO_BP" for GO Biological Process entities, "GO_CC" for GO Cellular Component entities) 
 
 Example:
 ```bash
@@ -65,6 +65,8 @@ javac ppr_for_ned_chebi.java
 java ppr_for_ned_chebi resnik_dishin
 ```
 
+For GO entities in CRAFT corpus change to the desired subontology in the ppr_for_ned_go.java script
+ 
 ### Calculate metrics
 
 Process the results to get more results than what is given by PPRforNED:
