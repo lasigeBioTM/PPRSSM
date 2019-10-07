@@ -6,7 +6,7 @@ import sqlite3
 from io import StringIO
 
 # http://flask.pocoo.org/docs/1.0/patterns/sqlite3/
-# This is a flask app to run DiShIn as a service and cache results to a in-memory database
+# This is a flask app to run DiShIn as a service and cache results to a sqlite database
 import ssmpy as ssm
 
 # from dishin import calculate_terms_similarity
@@ -15,12 +15,16 @@ app = Flask(__name__)
 
 
 DATABASE = "./cache.db"
-ssm.semantic_base("chebi.db")
+
+ssm.semantic_base("chebi.db", check_same_thread=False)
 
 # https://stackoverflow.com/a/10856450
 def init_sqlite_db(app):
     # Read database to tempfile
-    con = sqlite3.connect(DATABASE)
+    con = sqlite3.connect(DATABASE, check_same_thread=False)
+    sql = "create table if not exists cache (id1 integer, id2 integer, measure text, value text)"
+    con.execute(sql)
+    con.commit()
     tempfile = StringIO()
     for line in con.iterdump():
         tempfile.write("%s\n" % line)
@@ -28,7 +32,7 @@ def init_sqlite_db(app):
     tempfile.seek(0)
 
     # Create a database in memory and import from tempfile
-    app.sqlite = sqlite3.connect(":memory:")
+    app.sqlite = sqlite3.connect(":memory:", check_same_thread=False)
     app.sqlite.cursor().executescript(tempfile.read())
     app.sqlite.commit()
     app.sqlite.row_factory = sqlite3.Row
@@ -37,7 +41,10 @@ def init_sqlite_db(app):
 def get_db():
     db = getattr(g, "_database", None)
     if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
+        db = g._database = sqlite3.connect(DATABASE, check_same_thread=False)
+        sql = "create table if not exists cache (id1 integer, id2 integer, measure text, value text)"
+        db.execute(sql)
+        db.commit()
 
     # tempfile = StringIO()
     # for line in db.iterdump():
