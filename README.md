@@ -28,7 +28,7 @@ We used the following corpora:
 
 1. HPO GSC+ (https://github.com/lasigeBioTM/IHP/raw/master/GSC%2B.rar)
 2. ChEBI patents corpus (provided with this repo)
-3. CRAFT (https://github.com/UCDenver-ccp/CRAFT)
+3. CRAFT (https://github.com/UCDenver-ccp/CRAFT/releases/tag/3.0 - put brat files inside CRAFT/GO_BP and CRAFT/GO_CC)
 
 And the following ontologies:
 
